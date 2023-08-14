@@ -1,3 +1,10 @@
+tileos-settings-river (0.4~tileos) unstable; urgency=medium
+
+  * Fix session wrapper
+  * Split config
+
+ -- Aleksey Samoilov <samoilov.lex@gmail.com>  Mon, 14 Aug 2023 22:18:34 +0400
+
 tileos-settings-river (0.3~tileos) unstable; urgency=medium
 
   * Add intial start-river wrapper
