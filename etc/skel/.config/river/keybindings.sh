@@ -3,8 +3,8 @@
 # Use the "logo" key as the primary modifier
 mod="Mod4"
 
-# Super+Shift+Return to start an instance of foot (https://codeberg.org/dnkl/foot)
-riverctl map normal Super+Shift Return spawn foot
+# Super+Shift+Return to start an instance of Alacritty
+riverctl map normal Super+Shift Return spawn alacritty
 
 # Super+Q to close the focused view
 riverctl map normal Super Q close
