@@ -1,3 +1,9 @@
+tileos-settings-river (0.5~tileos) unstable; urgency=medium
+
+  * Set Alacritty as default terminal
+
+ -- Aleksey Samoilov <samoilov.lex@gmail.com>  Tue, 22 Aug 2023 01:04:10 +0400
+
 tileos-settings-river (0.4~tileos) unstable; urgency=medium
 
   * Fix session wrapper
