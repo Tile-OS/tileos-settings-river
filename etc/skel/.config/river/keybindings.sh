@@ -138,11 +138,8 @@ done
 # Set keyboard repeat rate
 riverctl set-repeat 50 300
 
-# Make all views with an app-id that starts with "float" and title "foo" start floating.
-riverctl rule-add float -app-id 'float*' -title 'foo'
-
-# Make all views with app-id "bar" and any title use client-side decorations
-riverctl rule-add csd -app-id "bar"
+# Make all views with an app-id that starts with "floating_shell" start floating.
+riverctl float-filter-add app-id "floating_shell"
 
 # Set the default layout generator to be rivertile and start it.
 # River will send the process group of the init executable SIGTERM on exit.

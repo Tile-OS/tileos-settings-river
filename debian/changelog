@@ -1,3 +1,9 @@
+tileos-settings-river (0.6~tileos) unstable; urgency=medium
+
+  * Initial Waybar config
+
+ -- Aleksey Samoilov <samoilov.lex@gmail.com>  Tue, 22 Aug 2023 22:56:07 +0400
+
 tileos-settings-river (0.5~tileos) unstable; urgency=medium
 
   * Set Alacritty as default terminal
