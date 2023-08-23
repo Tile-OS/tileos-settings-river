@@ -103,7 +103,7 @@
           "warning": 70,
           "critical": 90
           },
-    "on-click": "aclacritty --class floating_shell -e btop"
+    "on-click": "alacritty --class floating_shell -e btop"
     },
 
     "memory": {
@@ -113,7 +113,7 @@
           "warning": 70,
           "critical": 90
         },
-    "on-click": "aclacritty --class floating_shell -e btop"
+    "on-click": "alacritty --class floating_shell -e btop"
     
     },
 
