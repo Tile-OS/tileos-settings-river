@@ -1,3 +1,9 @@
+tileos-settings-river (0.7~tileos) unstable; urgency=medium
+
+  * Add missing scripts
+
+ -- Aleksey Samoilov <samoilov.lex@gmail.com>  Wed, 23 Aug 2023 13:38:36 +0400
+
 tileos-settings-river (0.6~tileos) unstable; urgency=medium
 
   * Initial Waybar config
