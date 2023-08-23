@@ -93,8 +93,8 @@
         "format": "",
         "interval": "once",
         "return-type": "json",
-        "on-click": "swaymsg -q exec '$clipboard'; pkill -RTMIN+9 waybar",
-        "on-click-right": "swaymsg -q exec '$clipboard-del'; pkill -RTMIN+9 waybar",
+        "on-click": "riverctl spawn '/usr/share/river/scripts/clipboard-manager.sh --list'; pkill -RTMIN+9 waybar",
+        "on-click-right": "riverctl spawn '/usr/share/river/scripts/clipboard-manager.sh --del'; pkill -RTMIN+9 waybar",
         "on-click-middle": "rm -f ~/.cache/cliphist/db; pkill -RTMIN+9 waybar",
         "exec": "printf '{\"tooltip\":\"%s\"}' $(cliphist list | wc -l)' item(s) in the clipboard\r(Mid click to clear)'",
         "exec-if": "[ -x \"$(command -v cliphist)\" ] && [ $(cliphist list | wc -l) -gt 0 ]",
@@ -161,10 +161,10 @@
        },
        "tooltip-format": "{icon}  {volume}% {format_source}",
        "on-click": "riverctl spawn /usr/share/river/scripts/pulse.sh",
-       "on-click-middle": "exec pulsemixer --toggle-mute && /usr/share/river/scripts/volume-notify.sh",
+       "on-click-middle": "pulsemixer --toggle-mute && /usr/share/river/scripts/volume-notify.sh",
        "on-click-right": "riverctl spawn pavucontrol",
-       "on-scroll-up": "exec pulsemixer --change-volume +5 && /usr/share/river/scripts/volume-notify.sh",
-       "on-scroll-down": "exec pulsemixer --change-volume -5 && /usr/share/river/scripts/volume-notify.sh"
+       "on-scroll-up": "pulsemixer --change-volume +5 && /usr/share/river/scripts/volume-notify.sh",
+       "on-scroll-down": "pulsemixer --change-volume -5 && /usr/share/river/scripts/volume-notify.sh"
     },
     
     "clock": {
