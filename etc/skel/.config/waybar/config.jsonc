@@ -2,10 +2,10 @@
     "layer": "top",
     "position": "top",
     "height": 30,
-    "modules-left": ["custom/menu"],
-    "modules-center": ["custom/wf-recorder"],
+    "modules-left": ["custom/menu", "river/tags", "river/window"],
+    "modules-center": ["clock"],
     "modules-right": [
-        "custom/scratchpad",
+        "tray",
         "custom/playerctl",
         "custom/wlsunset",
         "idle_inhibitor",
@@ -17,9 +17,7 @@
         "network",
         "bluetooth",
         "pulseaudio",
-        "clock",
-        "custom/power",
-        "tray"
+        "custom/power"
     ],
 
     "custom/menu": {
@@ -28,15 +26,12 @@
         "tooltip": false
     },
 
-    "custom/wf-recorder": {
-         "interval": "once",
-         "return-type": "json",
-         "format": "{}",
-         "tooltip-format": "{tooltip}",
-         "exec": "echo '{\"class\": \"recording\",\"text\":\"\",\"tooltip\":\"press $mod+Esc to stop recording\"}'",
-         "exec-if": "pgrep wf-recorder",
-         "on-click": "killall -s SIGINT wf-recorder",
-         "signal": 8
+    "river/tags": {
+        "num-tags": 9
+    },
+
+    "river/window": {
+       "format": "{}"
     },
 
     "custom/playerctl": {
@@ -93,8 +88,8 @@
         "format": "",
         "interval": "once",
         "return-type": "json",
-        "on-click": "riverctl spawn '/usr/share/river/scripts/clipboard-manager.sh --list'; pkill -RTMIN+9 waybar",
-        "on-click-right": "riverctl spawn '/usr/share/river/scripts/clipboard-manager.sh --del'; pkill -RTMIN+9 waybar",
+        "on-click": "/usr/share/river/scripts/clipboard-manager.sh --list; pkill -RTMIN+9 waybar",
+        "on-click-right": "/usr/share/river/scripts/clipboard-manager.sh --del; pkill -RTMIN+9 waybar",
         "on-click-middle": "rm -f ~/.cache/cliphist/db; pkill -RTMIN+9 waybar",
         "exec": "printf '{\"tooltip\":\"%s\"}' $(cliphist list | wc -l)' item(s) in the clipboard\r(Mid click to clear)'",
         "exec-if": "[ -x \"$(command -v cliphist)\" ] && [ $(cliphist list | wc -l) -gt 0 ]",
@@ -108,7 +103,7 @@
           "warning": 70,
           "critical": 90
           },
-    "on-click": "riverctl spawn /usr/share/river/scripts/btop.sh"
+    "on-click": "aclacritty --class floating_shell -e btop"
     },
 
     "memory": {
@@ -118,7 +113,7 @@
           "warning": 70,
           "critical": 90
         },
-    "on-click": "riverctl spawn /usr/share/river/scripts/btop.sh"
+    "on-click": "aclacritty --class floating_shell -e btop"
     
     },
 
@@ -137,13 +132,13 @@
        "tooltip-format-wifi": "{icon} {ifname} ({essid}): {ipaddr}",
        "tooltip-format-disconnected": "{icon} disconnected",
        "tooltip-format-disabled": "{icon} disabled",
-       "on-click": "riverctl spawn /usr/share/river/scripts/nmtui.sh"
+       "on-click": "alacritty --class floating_shell -e nmtui connect"
     },
 
     "bluetooth": {
         "format": "",
         "format-disabled": "",
-        "on-click": "riverctl spawn /usr/share/river/scripts/bluetooth-manager.sh",
+        "on-click": "alacritty --class floating_shell -e bluetuith",
         "on-click-right": "rfkill toggle bluetooth",
         "tooltip-format": "{}"
     },
@@ -160,9 +155,9 @@
            "default": ["", "", ""]
        },
        "tooltip-format": "{icon}  {volume}% {format_source}",
-       "on-click": "riverctl spawn /usr/share/river/scripts/pulse.sh",
+       "on-click": "alacritty --class floating_shell -e pulsemixer",
        "on-click-middle": "pulsemixer --toggle-mute && /usr/share/river/scripts/volume-notify.sh",
-       "on-click-right": "riverctl spawn pavucontrol",
+       "on-click-right": "pavucontrol",
        "on-scroll-up": "pulsemixer --change-volume +5 && /usr/share/river/scripts/volume-notify.sh",
        "on-scroll-down": "pulsemixer --change-volume -5 && /usr/share/river/scripts/volume-notify.sh"
     },
@@ -172,7 +167,7 @@
         "tooltip": true,
         "tooltip-format": "{:%d.%m.%Y %H:%M}",
         "interval": 5,
-        "on-click": "riverctl spawn /usr/share/river/scripts/calendar.sh"
+        "on-click": "alacritty --class floating_shell -e calcurse"
     },
 
     "custom/power": {

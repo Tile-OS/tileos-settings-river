@@ -45,26 +45,32 @@ window#waybar.hidden {
     opacity: 0.2;
 }
 
-#workspaces button {
+#tags button {
     border-bottom: 2px;
     border-color: #24273a;
     border-style: solid;
     margin-bottom: 3px;
+    transition-property: none;
 }
 
-#workspaces button.focused {
+#tags button.focused {
     color: #7dc4e4;
     border-color: #7dc4e4;
 }
 
-#workspaces button.urgent {
-    border-color: #ed8796;
-    color: #ed8796;
+#tags button.focused.occupied {
+    color: #7dc4e4;
+    border-color: #7dc4e4;
 }
 
-#mode {
-    color: #ebcb8b;
-    margin-bottom: 3px;
+#tags button.occupied {
+    color: #939ab7;
+    border-color: #939ab7;
+}
+
+#tags button.urgent {
+    color: #ed8796;
+    border-color: #ed8796;
 }
 
 #clock,
