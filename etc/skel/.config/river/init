@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+# Import environment variables to D-Bus and systemd
+VARIABLES="DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE"
+
+if hash dbus-update-activation-environment 2>/dev/null; then
+    exec dbus-update-activation-environment --systemd ${VARIABLES:- --all}
+fi
+
+exec systemctl --user import-environment $VARIABLES
+
 # Binding to reload the configuration (good for edits on bindings or adding new stuff
 riverctl map normal "Mod4" R spawn $HOME/.config/river/init
 
