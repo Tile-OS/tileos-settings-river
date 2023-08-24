@@ -1,15 +1,35 @@
 #!/usr/bin/env bash
 
+# Set keyboard layout. See man riverctl
+# riverctl keyboard-layout -options "grp:caps_toggle" "us,ru"
+
 # Binding to reload the configuration (good for edits on bindings or adding new stuff
 riverctl map normal "Mod4" R spawn $HOME/.config/river/init
+
+# Polkit agent
+riverctl spawn "/usr/bin/mate-polkit"
+
+# Wallpaper
+riverctl spawn $HOME/.azotebg
+
+# Waybar
+riverctl spawn $HOME/.config/river/waybar.sh
 
 # Include keybindings
 riverctl spawn $HOME/.config/river/keybindings.sh
 
+# Clipboard daemon
+pkill wl-paste
+wl-paste --watch cliphist store & disown
+
+# Lock screen daemon
+riverctl spawn $HOME/.config/river/screenlock.sh
+
 # Set background and border color
 riverctl background-color 0x002b36
-riverctl border-color-focused 0x93a1a1
-riverctl border-color-unfocused 0x586e75
+riverctl border-color-focused 0x8aadf4
+riverctl border-color-unfocused 0xa5adcb
+riverctl border-width 2
 
 # Import environment variables to D-Bus and systemd
 VARIABLES="DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE"
