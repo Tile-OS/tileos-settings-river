@@ -2,15 +2,27 @@
 
 # Use the "logo" key as the primary modifier
 mod="Mod4"
+# Default terminal emulator
+term="alacritty"
+# Volume changing notify
+volume_bar="/usr/share/river/scripts/volume-notify.sh"
+# Brightness changing notify
+brightness_bar="/usr/share/river/scripts/brightness-notify.sh"
+# Calculate step to change brightness
+brightness_step="echo $(( $(light -Mr) / 100 * 5 < 1 ? 1 : $(( $(light -Mr) / 100 * 5 )) ))"
 
-# $mod+Shift+Return to start an instance of Alacritty
-riverctl map normal $mod+Shift Return spawn alacritty
+# Screenshot scripts
+riverctl map normal "None" Print spawn "$HOME/.config/river/screenshot.sh full"
+riverctl map normal "$mod" Print spawn "$HOME/.config/river/screenshot.sh area"
+
+# $mod+Shift+Return to start an instance of terminal
+riverctl map normal $mod+Shift Return spawn $term
 
 # $mod+Q to close the focused view
 riverctl map normal $mod Q close
 
-# $mod+Shift+E to exit river
-riverctl map normal $mod+Shift E exit
+# $mod+Shift+E to run nwg-bar (logout, restart, shutdown, etc)
+riverctl map normal $mod+Shift E spawn nwg-bar
 
 # $mod+J and $mod+K to focus the next/previous view in the layout stack
 riverctl map normal $mod J focus-view next
@@ -120,9 +132,9 @@ do
     riverctl map $mode None XF86Eject spawn 'eject -T'
 
     # Control pulse audio volume with pamixer (https://github.com/cdemoulins/pamixer)
-    riverctl map $mode None XF86AudioRaiseVolume  spawn 'pamixer -i 5'
-    riverctl map $mode None XF86AudioLowerVolume  spawn 'pamixer -d 5'
-    riverctl map $mode None XF86AudioMute         spawn 'pamixer --toggle-mute'
+    riverctl map $mode None XF86AudioRaiseVolume  spawn "pulsemixer --change-volume +5 && $volume_bar"
+    riverctl map $mode None XF86AudioLowerVolume  spawn "pulsemixer --change-volume -5 && $volume_bar"
+    riverctl map $mode None XF86AudioMute         spawn "pulsemixer --toggle-mute && $volume_bar"
 
     # Control MPRIS aware media players with playerctl (https://github.com/altdesktop/playerctl)
     riverctl map $mode None XF86AudioMedia spawn 'playerctl play-pause'
@@ -131,8 +143,8 @@ do
     riverctl map $mode None XF86AudioNext  spawn 'playerctl next'
 
     # Control screen backlight brightness with light (https://github.com/haikarainen/light)
-    riverctl map $mode None XF86MonBrightnessUp   spawn 'light -A 5'
-    riverctl map $mode None XF86MonBrightnessDown spawn 'light -U 5'
+    riverctl map $mode None XF86MonBrightnessUp   spawn "light -r -A $($brightness_step) && $brightness_bar"
+    riverctl map $mode None XF86MonBrightnessDown spawn "light -r -U $($brightness_step) && $brightness_bar"
 done
 
 # Set keyboard repeat rate
@@ -140,6 +152,14 @@ riverctl set-repeat 50 300
 
 # Make all views with an app-id that starts with "floating_shell" start floating.
 riverctl float-filter-add app-id "floating_shell"
+# Set floating view for some apps
+riverctl float-filter-add app-id "engrampa"
+riverctl float-filter-add app-id "nwg-look"
+riverctl float-filter-add app-id "qt5ct"
+riverctl float-filter-add app-id "qt6ct"
+riverctl float-filter-add app-id "pavucontrol"
+riverctl float-filter-add title "Picture-in-Picture"
+riverctl float-filter-add title "Firefox — Sharing Indicator"
 
 # Set the default layout generator to be rivertile and start it.
 # River will send the process group of the init executable SIGTERM on exit.
