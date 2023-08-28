@@ -8,12 +8,14 @@ term="alacritty"
 volume_bar="/usr/share/river/scripts/volume-notify.sh"
 # Brightness changing notify
 brightness_bar="/usr/share/river/scripts/brightness-notify.sh"
+# Screenshot notify
+screenshot_notify="[[ $(wl-paste -l) == "image/png" ]] && notify-send "Screenshot copied to clipboard""
 # Calculate step to change brightness
 brightness_step="echo $(( $(light -Mr) / 100 * 5 < 1 ? 1 : $(( $(light -Mr) / 100 * 5 )) ))"
 
 # Screenshot scripts
-riverctl map normal "None" Print spawn "$HOME/.config/river/screenshot.sh full"
-riverctl map normal "$mod" Print spawn "$HOME/.config/river/screenshot.sh area"
+riverctl map normal "None" Print spawn "/usr/bin/river-grimshot save screen - | swappy -f - && $screenshot_notify"
+riverctl map normal "$mod" Print spawn "/usr/bin/river-grimshot save area - | swappy -f - && $screenshot_notify"
 
 # $mod+Shift+Return to start an instance of terminal
 riverctl map normal $mod+Shift Return spawn $term
