@@ -26,13 +26,13 @@ riverctl map normal "None" Print spawn "/usr/bin/river-grimshot save screen - | 
 riverctl map normal "$mod" Print spawn "/usr/bin/river-grimshot save area - | swappy -f - && $screenshot_notify"
 
 # $mod+Shift+Return to start an instance of terminal
-riverctl map normal $mod+Shift Return spawn $term
+riverctl map normal $mod Return spawn $term
 
 # $mod+D to start an instance of application launcher
 riverctl map normal $mod D spawn "$launcher"
 
 # $mod+Q to close the focused view
-riverctl map normal $mod Q close
+riverctl map normal $mod+Shift Q close
 
 # $mod+Shift+E to run nwg-bar (logout, restart, shutdown, etc)
 riverctl map normal $mod+Shift E spawn nwg-bar
@@ -55,7 +55,7 @@ riverctl map normal $mod+Shift Period send-to-output next
 riverctl map normal $mod+Shift Comma send-to-output previous
 
 # $mod+Return to bump the focused view to the top of the layout stack
-riverctl map normal $mod Return zoom
+riverctl map normal $mod+Shift Return zoom
 
 # $mod+H and $mod+L to decrease/increase the main ratio of rivertile(1)
 riverctl map normal $mod H send-layout-cmd rivertile "main-ratio -0.05"
