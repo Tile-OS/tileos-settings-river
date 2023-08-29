@@ -21,6 +21,7 @@ riverctl spawn $HOME/.config/river/keybindings.sh
 # Clipboard daemon
 pkill wl-paste
 wl-paste --watch cliphist store & disown
+wl-paste --watch pkill -RTMIN+9 waybar & disown
 
 # Lock screen daemon
 riverctl spawn $HOME/.config/river/screenlock.sh
