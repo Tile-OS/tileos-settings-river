@@ -2,14 +2,22 @@
 
 # Use the "logo" key as the primary modifier
 mod="Mod4"
+
 # Default terminal emulator
 term="alacritty"
+
+# Application launcher
+launcher="rofi -show combi -combi-modi 'drun,run' -terminal $term -ssh-command '{terminal} {ssh-client} {host} [-p {port}]' -run-shell-command '{terminal} {cmd}' -show-icons"
+
 # Volume changing notify
 volume_bar="/usr/share/river/scripts/volume-notify.sh"
+
 # Brightness changing notify
 brightness_bar="/usr/share/river/scripts/brightness-notify.sh"
+
 # Screenshot notify
 screenshot_notify="[[ $(wl-paste -l) == "image/png" ]] && notify-send "Screenshot copied to clipboard""
+
 # Calculate step to change brightness
 brightness_step="echo $(( $(light -Mr) / 100 * 5 < 1 ? 1 : $(( $(light -Mr) / 100 * 5 )) ))"
 
@@ -19,6 +27,9 @@ riverctl map normal "$mod" Print spawn "/usr/bin/river-grimshot save area - | sw
 
 # $mod+Shift+Return to start an instance of terminal
 riverctl map normal $mod+Shift Return spawn $term
+
+# $mod+D to start an instance of application launcher
+riverctl map normal $mod D spawn "$launcher"
 
 # $mod+Q to close the focused view
 riverctl map normal $mod Q close
