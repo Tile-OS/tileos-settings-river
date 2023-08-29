@@ -7,7 +7,7 @@ mod="Mod4"
 term="alacritty"
 
 # Application launcher
-launcher="rofi -show combi -combi-modi 'drun,run' -terminal $term -ssh-command '{terminal} {ssh-client} {host} [-p {port}]' -run-shell-command '{terminal} {cmd}' -show-icons"
+launcher="rofi -show combi -combi-modi 'drun,run' -terminal $term -ssh-command '{terminal} {ssh-client} {host} [-p {port}]' -run-shell-command '{terminal} {cmd}' -show-icons -font 'Hack 12'"
 
 # Volume changing notify
 volume_bar="/usr/share/river/scripts/volume-notify.sh"
