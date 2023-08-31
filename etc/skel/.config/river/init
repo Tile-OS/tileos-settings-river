@@ -23,6 +23,10 @@ pkill wl-paste
 wl-paste --watch cliphist store & disown
 wl-paste --watch pkill -RTMIN+9 waybar & disown
 
+# Playerctl daemon
+pkill playerctl
+playerctl -a metadata --format \'{{status}} {{title}}\' --follow | while read line; do pkill -RTMIN+5 waybar; done & disown
+
 # Screenshot notification
 riverctl spawn /usr/share/river/scripts/screenshot-notify.sh & disown
 
