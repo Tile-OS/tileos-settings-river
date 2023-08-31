@@ -23,6 +23,9 @@ pkill wl-paste
 wl-paste --watch cliphist store & disown
 wl-paste --watch pkill -RTMIN+9 waybar & disown
 
+# Screenshot notification
+riverctl spawn /usr/share/river/scripts/screenshot-notify.sh & disown
+
 # Lock screen daemon
 riverctl spawn $HOME/.config/river/screenlock.sh
 
