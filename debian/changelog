@@ -1,3 +1,9 @@
+tileos-settings-river (0.10~tileos) unstable; urgency=medium
+
+  * Fixes
+
+ -- Aleksey Samoilov <samoilov.lex@gmail.com>  Sat, 02 Sep 2023 00:25:38 +0400
+
 tileos-settings-river (0.9~tileos) unstable; urgency=medium
 
   * Add more keybindings
