@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 VALUE=$(light -G | cut -d'.' -f1)
 TEXT="Brightness: ${VALUE}%"

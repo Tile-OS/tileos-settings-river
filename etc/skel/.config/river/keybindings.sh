@@ -18,9 +18,6 @@ brightness_bar="/usr/share/river/scripts/brightness-notify.sh"
 # Screenshot notify
 screenshot_notify="eval [[ $(wl-paste -l) == "image/png" ]] && notify-send 'Screenshot copied to clipboard'"
 
-# Calculate step to change brightness
-brightness_step="echo $(( $(light -Mr) / 100 * 5 < 1 ? 1 : $(( $(light -Mr) / 100 * 5 )) ))"
-
 # Screenshot scripts
 riverctl map normal "None" Print spawn "/usr/bin/river-grimshot save screen - | swappy -f - && bash -c $screenshot_notify"
 riverctl map normal "$mod" Print spawn "/usr/bin/river-grimshot save area - | swappy -f - && bash -c $screenshot_notify"
@@ -156,8 +153,8 @@ do
     riverctl map $mode None XF86AudioNext  spawn 'playerctl next'
 
     # Control screen backlight brightness with light (https://github.com/haikarainen/light)
-    riverctl map $mode None XF86MonBrightnessUp   spawn "light -r -A $($brightness_step) && $brightness_bar"
-    riverctl map $mode None XF86MonBrightnessDown spawn "light -r -U $($brightness_step) && $brightness_bar"
+    riverctl map $mode None XF86MonBrightnessUp   spawn "light -A 5 && $brightness_bar"
+    riverctl map $mode None XF86MonBrightnessDown spawn "light -U 5 && $brightness_bar"
 done
 
 # Set keyboard repeat rate

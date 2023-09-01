@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 DIR=${XDG_PICTURES_DIR:-$HOME/Pictures}
