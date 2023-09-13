@@ -37,6 +37,10 @@ riverctl spawn /usr/share/river/scripts/screenshot-notify.sh & disown
 # Lock screen daemon
 riverctl spawn $HOME/.config/river/screenlock.sh
 
+# Poweralertd daemon
+pkill poweralertd
+poweralertd -s -i "line power" & disown
+
 # Set background and border color
 riverctl background-color 0x002b36
 riverctl border-color-focused 0x8aadf4
