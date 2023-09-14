@@ -1,5 +1,36 @@
 #!/usr/bin/env bash
 
+export XDG_CURRENT_DESKTOP=river
+export XDG_SESSION_DESKTOP="${XDG_SESSION_DESKTOP:-river}"
+export XDG_SESSION_TYPE=wayland
+VARIABLES="DESKTOP_SESSION XDG_CURRENT_DESKTOP XDG_SESSION_DESKTOP XDG_SESSION_TYPE"
+VARIABLES="${VARIABLES} DISPLAY WAYLAND_DISPLAY"
+SESSION_TARGET="river-session.target"
+SESSION_SHUTDOWN_TARGET="river-session-shutdown.target"
+
+if hash dbus-update-activation-environment 2>/dev/null; then
+    # shellcheck disable=SC2086
+    dbus-update-activation-environment --systemd ${VARIABLES:- --all}
+fi
+
+# reset failed state of all user units
+systemctl --user reset-failed
+
+# shellcheck disable=SC2086
+systemctl --user import-environment $VARIABLES
+systemctl --user start "$SESSION_TARGET"
+
+# declare cleanup handler and run it on init termination via kill, Ctrl-C or 'riverctl exit'
+session_cleanup () {
+    # stop the session target and unset the variables
+    systemctl --user start --job-mode=replace-irreversibly "$SESSION_SHUTDOWN_TARGET"
+    if [ -n "$VARIABLES" ]; then
+        # shellcheck disable=SC2086
+        systemctl --user unset-environment $VARIABLES
+    fi
+}
+trap session_cleanup EXIT INT TERM
+
 # Set keyboard layout. See man riverctl
 # riverctl keyboard-layout -options "grp:caps_toggle" "us,ru"
 
@@ -11,9 +42,6 @@ riverctl spawn "/usr/bin/mate-polkit"
 
 # Wallpaper
 riverctl spawn $HOME/.azotebg
-
-# Waybar
-riverctl spawn $HOME/.config/river/waybar.sh
 
 # Include keybindings
 riverctl spawn $HOME/.config/river/keybindings.sh
@@ -37,21 +65,13 @@ riverctl spawn /usr/share/river/scripts/screenshot-notify.sh & disown
 # Lock screen daemon
 riverctl spawn $HOME/.config/river/screenlock.sh
 
-# Poweralertd daemon
-pkill poweralertd
-poweralertd -s -i "line power" & disown
-
 # Set background and border color
 riverctl background-color 0x002b36
 riverctl border-color-focused 0x8aadf4
 riverctl border-color-unfocused 0xa5adcb
 riverctl border-width 2
 
-# Import environment variables to D-Bus and systemd
-VARIABLES="DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE"
-
-exec systemctl --user import-environment $VARIABLES
-
-if hash dbus-update-activation-environment 2>/dev/null; then
-    exec dbus-update-activation-environment --systemd ${VARIABLES:- --all}
-fi
+# Set the default layout generator to be rivertile and start it.
+# River will send the process group of the init executable SIGTERM on exit.
+riverctl default-layout rivertile
+rivertile -view-padding 6 -outer-padding 6

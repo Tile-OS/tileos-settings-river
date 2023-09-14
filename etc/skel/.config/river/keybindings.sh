@@ -170,8 +170,3 @@ riverctl float-filter-add app-id "qt6ct"
 riverctl float-filter-add app-id "pavucontrol"
 riverctl float-filter-add title "Picture-in-Picture"
 riverctl float-filter-add title "Firefox — Sharing Indicator"
-
-# Set the default layout generator to be rivertile and start it.
-# River will send the process group of the init executable SIGTERM on exit.
-riverctl default-layout rivertile
-rivertile -view-padding 6 -outer-padding 6 &
