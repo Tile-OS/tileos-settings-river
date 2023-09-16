@@ -9,4 +9,4 @@ Type=simple
 ExecStart=/usr/bin/swayidle
 
 [Install]
-WantedBy=sway-session.target
+WantedBy=river-session.target
