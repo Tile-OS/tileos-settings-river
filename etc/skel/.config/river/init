@@ -7,6 +7,8 @@ VARIABLES="DESKTOP_SESSION XDG_CURRENT_DESKTOP XDG_SESSION_DESKTOP XDG_SESSION_T
 VARIABLES="${VARIABLES} DISPLAY WAYLAND_DISPLAY"
 SESSION_TARGET="river-session.target"
 SESSION_SHUTDOWN_TARGET="river-session-shutdown.target"
+SESSION_XDG_AUTOSTART_TARGET="river-xdg-autostart.target"
+SNI_CHECK="/usr/share/river/scripts/wait-sni-ready"
 
 if hash dbus-update-activation-environment 2>/dev/null; then
     # shellcheck disable=SC2086
@@ -30,6 +32,9 @@ session_cleanup () {
     fi
 }
 trap session_cleanup EXIT INT TERM
+
+# Wait for StatusNotifierWatcher is available and start XDG Autostart target
+"$SNI_CHECK" && systemctl --user start "$SESSION_XDG_AUTOSTART_TARGET"
 
 # Set keyboard layout. See man riverctl
 # riverctl keyboard-layout -options "grp:caps_toggle" "us,ru"

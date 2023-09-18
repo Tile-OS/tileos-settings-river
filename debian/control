@@ -2,13 +2,13 @@ Source: tileos-settings-river
 Section: x11
 Priority: optional
 Maintainer: Aleksey Samoilov <samoilov.lex@gmail.com>
-Build-Depends: debhelper-compat (= 13)
+Build-Depends: debhelper-compat (= 13),
 Standards-Version: 4.6.0
 Homepage: https://github.com/Tile-OS/tileos-settings-river.git
 Rules-Requires-Root: no
 
 Package: tileos-settings-river
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${misc:Depends}, python3-tenacity, python3-dbus-next
 Conflicts: tileos-settings-sway
 Description: default settings for River on TileOS
