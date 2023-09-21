@@ -1,9 +1,14 @@
+configuration {
+    show-icons: true;
+}
+
 * {
     lightbg: #24273a;
     background: #24273a;
     lightfg: #8aadf4;
     foreground: #cad3f5;
     border-color: #8aadf4;
+    font: "Hack 12";
 }
 
 window {
