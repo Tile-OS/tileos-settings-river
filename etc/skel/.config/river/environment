@@ -1,3 +1,0 @@
-# This file is a part of TileOS configuration for River and will be sourced
-# from /usr/bin/start-river script for all users of the system.
-# User-specific variables should be placed in $XDG_CONFIG_HOME/river/environment
