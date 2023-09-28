@@ -1,3 +1,9 @@
+tileos-settings-river (0.13~tileos) unstable; urgency=medium
+
+  * Integrate systemd
+
+ -- Aleksey Samoilov <samoilov.lex@gmail.com>  Thu, 28 Sep 2023 21:32:54 +0400
+
 tileos-settings-river (0.12~tileos) unstable; urgency=medium
 
   * Add nwg-drawer config
