@@ -22,6 +22,12 @@ screenshot_notify="eval [[ $(wl-paste -l) == "image/png" ]] && notify-send 'Scre
 riverctl map normal "None" Print spawn "/usr/bin/river-grimshot save screen - | swappy -f - && bash -c $screenshot_notify"
 riverctl map normal "$mod" Print spawn "/usr/bin/river-grimshot save area - | swappy -f - && bash -c $screenshot_notify"
 
+# Set keyboard layout. See man riverctl
+# riverctl keyboard-layout -options "grp:caps_toggle" "us,ru"
+
+# Binding to reload the configuration (good for edits on bindings or adding new stuff
+riverctl map normal $mod R spawn $HOME/.config/river/init
+
 # $mod+Shift+Return to start an instance of terminal
 riverctl map normal $mod Return spawn $term
 
