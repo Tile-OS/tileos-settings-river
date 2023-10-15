@@ -36,12 +36,6 @@ trap session_cleanup EXIT INT TERM
 # Wait for StatusNotifierWatcher is available and start XDG Autostart target
 "$SNI_CHECK" && systemctl --user start "$SESSION_XDG_AUTOSTART_TARGET"
 
-# Set keyboard layout. See man riverctl
-# riverctl keyboard-layout -options "grp:caps_toggle" "us,ru"
-
-# Binding to reload the configuration (good for edits on bindings or adding new stuff
-riverctl map normal "Mod4" R spawn $HOME/.config/river/init
-
 # Polkit agent
 riverctl spawn "/usr/bin/mate-polkit"
 
